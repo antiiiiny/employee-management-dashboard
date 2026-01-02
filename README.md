@@ -1,59 +1,44 @@
-# EmployeeApp
+# Employee Management Dashboard
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.9.
+## Overview
+Angular 20 app for managing employees with list view, detail view, and CRUD operations.
 
-## Development server
+## Features
+- Employee list with add/edit/delete
+- Employee detail page via routing
+- Bootstrap responsive UI
+- Template-driven forms + validation
 
-To start a local development server, run:
+## Project Structure
+src/
+├── app/
+│ ├── app.module.ts # Root module
+│ ├── app-routing-module.ts # Routes
+│ ├── app.component.ts # Shell with <router-outlet>
+│ ├── navbar/ # Navigation
+│ ├── list-employees/ # CRUD list
+│ └── employee-detail/ # Single employee view
+├── models/
+│ └── employee.model.ts # TypeScript interface
+└── assets/
 
-```bash
-ng serve
-```
+## Architecture Diagram
++-------------+ +-----------------+
+| Navbar | | Router Outlet |
++-------------+ +--------+--------+
+|
++-------+-------+
+| |
++-------+-------+ +---v---+
+| ListEmployees | |Detail |
+| (CRUD table) | |View |
++---------------+ +-------+
+## Setup Instructions
+1. `npm install`
+2. `ng serve`
+3. Visit `http://localhost:4200/employees`
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Technologies Used
+- Angular 20 (NgModule, Components, Routing)
+- Bootstrap 5 (UI)
+- TypeScript (Models)

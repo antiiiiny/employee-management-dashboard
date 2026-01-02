@@ -1,0 +1,18 @@
+<!-- employee-detail.html -->
+<div class="container" *ngIf="employee; else notFound">
+  <h2>Employee Detail</h2>
+
+  <p><strong>ID:</strong> {{ employee.id }}</p>
+  <p><strong>Name:</strong> {{ employee.firstName }} {{ employee.lastName }}</p>
+  <p><strong>Salary:</strong> {{ employee.salary }}</p>
+  <p><strong>Date of Joining:</strong> {{ employee.doj | date:'dd/MM/yyyy' }}</p>
+
+  <button class="btn btn-secondary" (click)="goBack()">Back</button>
+</div>
+
+<ng-template #notFound>
+  <div class="container">
+    <p>Employee not found.</p>
+    <button class="btn btn-secondary" (click)="goBack()">Back</button>
+  </div>
+</ng-template>

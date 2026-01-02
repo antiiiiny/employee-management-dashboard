@@ -1,0 +1,84 @@
+<div class = "container">
+    <div>
+        <div>
+            <input type="text" id="name" placeholder="Enter First Name " [(ngModel)]="newFirstName" class="form-control"/>
+        </div>
+        <br>
+        <div>
+            <input type="text" id="name" placeholder="Enter Last Name " [(ngModel)]="newLastName" class="form-control"/>
+        </div>
+        <br>
+        <div>
+            <input type="number" id="salary" placeholder="Enter Salary" [(ngModel)]="newSalary" class="form-control"/>
+        </div>
+        <br>
+        <div>
+            <input type="date" id="doj" placeholder="Enter DOJ" [(ngModel)]="doj" class="form-control"/>
+        </div>
+        <br>
+        <div>
+            <button class = "btn btn-primary" (click)="addNewEmployee()">Add Employee</button>
+        </div>
+
+    </div>
+    <hr>
+    
+    <div class = "card">
+        <div class="card-head">
+            <h2>List of employees</h2>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Salary</th>
+                    <th>Date of Joining</th>
+                    <th>Salary Class</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let employee of employees" [ngClass]="{
+                    high:employee.salary>=120000,
+                    medium:employee.salary>=60000 && employee.salary < 120000,
+                    low:employee.salary<60000
+                }">
+                    <td>
+                    <a [routerLink]="['/employees', employee.id]" class="text-decoration-none">
+                        {{ employee.id }}
+                    </a>
+                    </td>
+
+                    <td>{{employee.firstName}}</td>
+                    <td>{{employee.lastName}}</td>
+                    <!-- <td>{{employee.salary | currency: 'INR'}}</td> -->
+                     <td >
+                        <span *ngIf="!employee.isEditable">{{employee.salary | currency: 'INR'}}</span>
+                        <input type="number" *ngIf="employee.isEditable" min="0" [(ngModel)]="employeeSalary" class="form-control"/>
+                    </td>
+                    <td>{{employee.doj | date:'dd/MM/yyyy'}}</td>
+                    <td [ngSwitch]="getSalaryClass(employee.salary)">
+                        <span *ngSwitchCase="'High'" class="high">{{getSalaryClass(employee.salary)}}</span>
+                        <span *ngSwitchCase="'Medium'" class="medium">{{getSalaryClass(employee.salary)}}</span>
+                        <span *ngSwitchDefault class="low">{{getSalaryClass(employee.salary)}}</span>
+                    </td>
+                    <td>
+                        <span>
+                            <button class="btn btn-warning" (click)="editEmployee(employee)">Edit</button>
+                        </span>
+                        <span>
+                            <button class="btn btn-info" style = "margin-left: 1%" (click)="saveEmployeeSalary(employee)">Save</button>
+                        </span>
+                        <span>
+                            <button class="btn btn-danger" style = "margin-left: 1%" (click)="deleteEmployee(employee.id)">Delete</button>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
