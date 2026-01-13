@@ -41,4 +41,4 @@ src/
 ## Technologies Used
 - Angular 20 (NgModule, Components, Routing)
 - Bootstrap 5 (UI)
-- TypeScript (Models)
+- TypeScript (Model)
