@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "server": "json-server --watch db.json"
   },
   "prettier": {
     "printWidth": 100,
@@ -22,11 +23,14 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/common": "^20.3.0",
-    "@angular/compiler": "^20.3.0",
-    "@angular/core": "^20.3.0",
-    "@angular/forms": "^20.3.0",
-    "@angular/platform-browser": "^20.3.0",
+    "@angular/animations": "^20.3.17",
+    "@angular/cdk": "^20.2.14",
+    "@angular/common": "^20.3.15",
+    "@angular/compiler": "^20.3.15",
+    "@angular/core": "^20.3.15",
+    "@angular/forms": "^20.3.15",
+    "@angular/material": "^20.2.14",
+    "@angular/platform-browser": "^20.3.15",
     "@angular/router": "^20.3.0",
     "bootstrap": "^5.3.8",
     "rxjs": "~7.8.0",
@@ -39,6 +43,7 @@
     "@angular/compiler-cli": "^20.3.0",
     "@types/jasmine": "~5.1.0",
     "jasmine-core": "~5.9.0",
+    "json-server": "^0.17.4",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",

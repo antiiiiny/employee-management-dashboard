@@ -1,0 +1,52 @@
+<mat-toolbar color="primary" class="admin-toolbar">
+  <button mat-icon-button (click)="toggleSidenav()" class="toggle-button">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <span class="toolbar-title">
+    <mat-icon class="brand-icon">admin_panel_settings</mat-icon>
+    Admin Dashboard
+  </span>
+
+  <span class="spacer"></span>
+
+  <div class="admin-info">
+    <mat-icon class="user-icon">account_circle</mat-icon>
+    <span class="username">{{ currentAdmin }}</span>
+  </div>
+
+  <button mat-icon-button matTooltip="Logout" (click)="logout()" class="logout-button">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-sidenav-container class="admin-container">
+  <mat-sidenav
+    #sidenav
+    [opened]="sidenavOpen"
+    [mode]="'side'"
+    class="admin-sidenav"
+  >
+    <nav class="sidenav-nav">
+      <div class="nav-section">
+        <h3 class="nav-title">Main Menu</h3>
+        
+        <mat-nav-list>
+          <mat-list-item
+            *ngFor="let item of navItems"
+            [routerLink]="item.route"
+            routerLinkActive="active"
+            class="nav-item"
+          >
+            <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+            <span matListItemTitle>{{ item.label }}</span>
+          </mat-list-item>
+        </mat-nav-list>
+      </div>
+    </nav>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="admin-content">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

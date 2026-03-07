@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Employee } from '../models/employee.model';
 import { EmployeeService } from '../services/employee.service';
 
@@ -10,58 +11,58 @@ import { EmployeeService } from '../services/employee.service';
 })
 export class ListEmployees implements OnInit {
   employees: Employee[] = [];
-  newFirstName = '';
-  newLastName = '';
-  doj = new Date();
-  newSalary = 0;
+  employeeForm: FormGroup;
   employeeSalary = 0;
+  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'salary', 'doj', 'salaryClass', 'actions'];
 
-  constructor(private employeeService: EmployeeService) {}
+  constructor(
+    private employeeService: EmployeeService,
+    private fb: FormBuilder
+  ) {
+    this.employeeForm = this.fb.group({
+      firstName: ['', [Validators.required, Validators.minLength(2)]],
+      lastName: ['', [Validators.required, Validators.minLength(2)]],
+      doj: [new Date(), Validators.required],
+      salary: [0, [Validators.required, Validators.min(1)]]
+    });
+  }
 
   ngOnInit(): void {
     this.employeeService.getEmployees().subscribe(employees => {
-      this.employees = employees;
+      this.employees = [...employees];
     });
   }
 
   addNewEmployee() {
-    const employee = {
-      id: 0, // Will be set by service
-      firstName: this.newFirstName,
-      lastName: this.newLastName,
-      doj: this.doj,
-      salary: this.newSalary,
-      isEditable: false
-    };
-    if (employee.firstName.trim().length === 0 || employee.lastName.trim().length === 0) {
-      alert("First name and last name cannot be empty");
-      return;
+    if (this.employeeForm.valid) {
+      const employee = {
+        id: 0, // Will be set by service
+        firstName: this.employeeForm.value.firstName,
+        lastName: this.employeeForm.value.lastName,
+        doj: this.employeeForm.value.doj,
+        salary: this.employeeForm.value.salary,
+        isEditable: false
+      };
+
+      this.employeeService.addEmployee(employee).subscribe(newEmployee => {
+        // refresh the local list to guarantee uniqueness and to pick up
+        // any backend-side modifications; this avoids accidental duplicates
+        this.employeeService.getEmployees().subscribe(employees => {
+          this.employees = [...employees]; // Create new array reference for change detection
+        });
+        this.employeeForm.reset();
+        this.employeeForm.patchValue({ doj: new Date() });
+      });
     }
-    if (employee.salary <= 0) {
-      alert("salary should be above 0");
-      return;
-    }
-    this.employeeService.addEmployee(employee).subscribe(newEmployee => {
-      this.employees.push(newEmployee);
-      this.newFirstName = '';
-      this.newLastName = '';
-      this.doj = new Date();
-      this.newSalary = 0;
-    });
   }
 
   deleteEmployee(id: any) {
-    this.employeeService.deleteEmployee(id).subscribe(success => {
-      if (success) {
-        this.employees = this.employees.filter(s => s.id !== id);
-      }
+    this.employeeService.deleteEmployee(id).subscribe(() => {
+      // After deletion, refresh the list from backend
+      this.employeeService.getEmployees().subscribe(employees => {
+        this.employees = [...employees];
+      });
     });
-  }
-
-  getSalaryClass(salary: number): string {
-    if (salary >= 100000) return 'High';
-    else if (salary >= 60000) return 'Medium';
-    return 'Low';
   }
 
   editEmployee(employee: Employee) {

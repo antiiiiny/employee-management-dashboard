@@ -1,84 +1,124 @@
-<div class = "container">
-    <div>
-        <div>
-            <input type="text" id="name" placeholder="Enter First Name " [(ngModel)]="newFirstName" class="form-control"/>
-        </div>
-        <br>
-        <div>
-            <input type="text" id="name" placeholder="Enter Last Name " [(ngModel)]="newLastName" class="form-control"/>
-        </div>
-        <br>
-        <div>
-            <input type="number" id="salary" placeholder="Enter Salary" [(ngModel)]="newSalary" class="form-control"/>
-        </div>
-        <br>
-        <div>
-            <input type="date" id="doj" placeholder="Enter DOJ" [(ngModel)]="doj" class="form-control"/>
-        </div>
-        <br>
-        <div>
-            <button class = "btn btn-primary" (click)="addNewEmployee()">Add Employee</button>
-        </div>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Add New Employee</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="employeeForm" (ngSubmit)="addNewEmployee()">
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName" placeholder="Enter first name">
+          <mat-error *ngIf="employeeForm.get('firstName')?.invalid && employeeForm.get('firstName')?.touched">
+            First name is required and must be at least 2 characters
+          </mat-error>
+        </mat-form-field>
 
-    </div>
-    <hr>
-    
-    <div class = "card">
-        <div class="card-head">
-            <h2>List of employees</h2>
-        </div>
-    </div>
-    <div class="card-body">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Employee ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Salary</th>
-                    <th>Date of Joining</th>
-                    <th>Salary Class</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let employee of employees" [ngClass]="{
-                    high:employee.salary>=120000,
-                    medium:employee.salary>=60000 && employee.salary < 120000,
-                    low:employee.salary<60000
-                }">
-                    <td>
-                    <a [routerLink]="['/employees', employee.id]" class="text-decoration-none">
-                        {{ employee.id }}
-                    </a>
-                    </td>
+        <mat-form-field appearance="outline">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName" placeholder="Enter last name">
+          <mat-error *ngIf="employeeForm.get('lastName')?.invalid && employeeForm.get('lastName')?.touched">
+            Last name is required and must be at least 2 characters
+          </mat-error>
+        </mat-form-field>
 
-                    <td>{{employee.firstName}}</td>
-                    <td>{{employee.lastName}}</td>
-                    <!-- <td>{{employee.salary | currency: 'INR'}}</td> -->
-                     <td >
-                        <span *ngIf="!employee.isEditable">{{employee.salary | currency: 'INR'}}</span>
-                        <input type="number" *ngIf="employee.isEditable" min="0" [(ngModel)]="employeeSalary" class="form-control"/>
-                    </td>
-                    <td>{{employee.doj | date:'dd/MM/yyyy'}}</td>
-                    <td [ngSwitch]="getSalaryClass(employee.salary)">
-                        <span *ngSwitchCase="'High'" class="high">{{getSalaryClass(employee.salary)}}</span>
-                        <span *ngSwitchCase="'Medium'" class="medium">{{getSalaryClass(employee.salary)}}</span>
-                        <span *ngSwitchDefault class="low">{{getSalaryClass(employee.salary)}}</span>
-                    </td>
-                    <td>
-                        <span>
-                            <button class="btn btn-warning" (click)="editEmployee(employee)">Edit</button>
-                        </span>
-                        <span>
-                            <button class="btn btn-info" style = "margin-left: 1%" (click)="saveEmployeeSalary(employee)">Save</button>
-                        </span>
-                        <span>
-                            <button class="btn btn-danger" style = "margin-left: 1%" (click)="deleteEmployee(employee.id)">Delete</button>
-                        </span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+        <mat-form-field appearance="outline">
+          <mat-label>Salary</mat-label>
+          <input matInput type="number" formControlName="salary" placeholder="Enter salary">
+          <mat-error *ngIf="employeeForm.get('salary')?.invalid && employeeForm.get('salary')?.touched">
+            Salary is required and must be greater than 0
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Date of Joining</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="doj">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="!employeeForm.valid">
+        <mat-icon>add</mat-icon>
+        Add Employee
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<br>
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Employee List</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <table mat-table [dataSource]="employees" matSort class="mat-elevation-z8">
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+        <td mat-cell *matCellDef="let employee">
+          <a [routerLink]="['/employees', employee.id]" class="employee-link">{{ employee.id }}</a>
+        </td>
+      </ng-container>
+
+      <!-- First Name Column -->
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+        <td mat-cell *matCellDef="let employee"> {{ employee.firstName }} </td>
+      </ng-container>
+
+      <!-- Last Name Column -->
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+        <td mat-cell *matCellDef="let employee"> {{ employee.lastName }} </td>
+      </ng-container>
+
+      <!-- Salary Column -->
+      <ng-container matColumnDef="salary">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Salary </th>
+        <td mat-cell *matCellDef="let employee">
+          <span *ngIf="!employee.isEditable">{{ employee.salary | currency:'INR' }}</span>
+          <mat-form-field *ngIf="employee.isEditable" appearance="outline" class="edit-field">
+            <input matInput type="number" [(ngModel)]="employeeSalary" min="1">
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <!-- Date of Joining Column -->
+      <ng-container matColumnDef="doj">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date of Joining </th>
+        <td mat-cell *matCellDef="let employee"> {{ employee.doj | date:'dd/MM/yyyy' }} </td>
+      </ng-container>
+
+      <!-- Salary Class Column -->
+      <ng-container matColumnDef="salaryClass">
+        <th mat-header-cell *matHeaderCellDef> Salary Class </th>
+        <td mat-cell *matCellDef="let employee" [appHighlightSalary]="employee.salary">
+          {{ employee.salary | salaryClass }}
+        </td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let employee">
+          <button mat-button *ngIf="!employee.isEditable" (click)="editEmployee(employee)" color="accent">
+            <mat-icon>edit</mat-icon>
+            Edit
+          </button>
+          <button mat-button *ngIf="employee.isEditable" (click)="saveEmployeeSalary(employee)" color="primary">
+            <mat-icon>save</mat-icon>
+            Save
+          </button>
+          <button mat-button (click)="deleteEmployee(employee.id)" color="warn">
+            <mat-icon>delete</mat-icon>
+            Delete
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" [appHighlightSalary]="row.salary"></tr>
+    </table>
+  </mat-card-content>
+</mat-card>

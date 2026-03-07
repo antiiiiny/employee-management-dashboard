@@ -1,0 +1,80 @@
+<div class="dashboard-container">
+  <div class="welcome-section">
+    <h1>Welcome to Admin Dashboard</h1>
+    <p>Manage your organization's employees, departments, and reports</p>
+  </div>
+
+  <div class="stats-grid">
+    <!-- Total Employees Card -->
+    <mat-card class="stat-card" (click)="navigateToSection('employees')">
+      <mat-card-header>
+        <mat-icon class="stat-icon employees-icon">people</mat-icon>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="stat-value">{{ totalEmployees }}</div>
+        <div class="stat-label">Total Employees</div>
+        <button mat-button color="primary" class="view-button">
+          View All
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Departments Card -->
+    <mat-card class="stat-card" (click)="navigateToSection('departments')">
+      <mat-card-header>
+        <mat-icon class="stat-icon departments-icon">domain</mat-icon>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="stat-value">{{ totalDepartments }}</div>
+        <div class="stat-label">Departments</div>
+        <button mat-button color="primary" class="view-button">
+          View All
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Reports Card -->
+    <mat-card class="stat-card" (click)="navigateToSection('reports')">
+      <mat-card-header>
+        <mat-icon class="stat-icon reports-icon">assessment</mat-icon>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="stat-value">{{ pendingReports }}</div>
+        <div class="stat-label">Pending Reports</div>
+        <button mat-button color="primary" class="view-button">
+          View All
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Quick Actions Section -->
+  <div class="actions-section">
+    <h2>Quick Actions</h2>
+    
+    <div class="actions-grid">
+      <button mat-stroked-button (click)="navigateToSection('employees')" class="action-button">
+        <mat-icon>person_add</mat-icon>
+        <span>Add Employee</span>
+      </button>
+
+      <button mat-stroked-button (click)="navigateToSection('departments')" class="action-button">
+        <mat-icon>domain</mat-icon>
+        <span>Manage Departments</span>
+      </button>
+
+      <button mat-stroked-button (click)="navigateToSection('reports')" class="action-button">
+        <mat-icon>assessment</mat-icon>
+        <span>Generate Reports</span>
+      </button>
+
+      <button mat-stroked-button (click)="navigateToSection('employees')" class="action-button">
+        <mat-icon>search</mat-icon>
+        <span>Search Employee</span>
+      </button>
+    </div>
+  </div>
+</div>

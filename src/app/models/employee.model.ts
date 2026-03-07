@@ -4,5 +4,6 @@ export interface Employee {
   lastName: string;
   doj: Date;
   salary: number;
+  department?: string;
   isEditable :boolean;
 }

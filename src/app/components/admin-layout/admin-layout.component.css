@@ -1,0 +1,118 @@
+.admin-toolbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.toolbar-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 20px;
+  font-weight: 500;
+  margin-left: 16px;
+}
+
+.brand-icon {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+}
+
+.toggle-button {
+  margin-right: 16px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.admin-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 16px;
+}
+
+.user-icon {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+}
+
+.username {
+  font-size: 14px;
+  margin-right: 8px;
+}
+
+.logout-button {
+  color: inherit;
+}
+
+.admin-container {
+  height: calc(100vh - 64px);
+  display: flex;
+}
+
+.admin-sidenav {
+  width: 280px;
+  background-color: #f5f5f5;
+  border-right: 1px solid #e0e0e0;
+}
+
+.sidenav-nav {
+  padding: 20px 0;
+}
+
+.nav-section {
+  margin-bottom: 30px;
+}
+
+.nav-title {
+  padding: 0 16px;
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #999;
+  letter-spacing: 1px;
+}
+
+mat-nav-list {
+  padding: 0;
+}
+
+.nav-item {
+  margin: 4px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.nav-item.active {
+  background-color: rgba(63, 81, 181, 0.1);
+  color: #3f51b5;
+}
+
+.nav-item.active mat-icon {
+  color: #3f51b5;
+}
+
+.admin-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  .admin-sidenav {
+    width: 250px;
+  }
+
+  .toolbar-title {
+    margin-left: 0;
+  }
+
+  .username {
+    display: none;
+  }
+}

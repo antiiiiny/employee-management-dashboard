@@ -1,0 +1,139 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "firstName": "Sarah",
+      "lastName": "Johnson",
+      "salary": 75000,
+      "doj": "2020-01-15",
+      "department": "Human Resources",
+      "isEditable": false
+    },
+    {
+      "id": 2,
+      "firstName": "Mark",
+      "lastName": "Wilson",
+      "salary": 95000,
+      "doj": "2018-06-20",
+      "department": "Information Technology",
+      "isEditable": false
+    },
+    {
+      "id": 3,
+      "firstName": "Emily",
+      "lastName": "Davis",
+      "salary": 80000,
+      "doj": "2019-03-10",
+      "department": "Finance",
+      "isEditable": false
+    },
+    {
+      "id": 4,
+      "firstName": "John",
+      "lastName": "Brown",
+      "salary": 70000,
+      "doj": "2021-07-25",
+      "department": "Sales",
+      "isEditable": false
+    },
+    {
+      "id": 5,
+      "firstName": "Lisa",
+      "lastName": "Anderson",
+      "salary": 82000,
+      "doj": "2020-02-14",
+      "department": "Operations",
+      "isEditable": false
+    },
+    {
+      "id": 6,
+      "firstName": "Michael",
+      "lastName": "Thompson",
+      "salary": 78000,
+      "doj": "2021-09-01",
+      "department": "Information Technology",
+      "isEditable": false
+    },
+    {
+      "id": 7,
+      "firstName": "Rachel",
+      "lastName": "Martinez",
+      "salary": 72000,
+      "doj": "2022-01-10",
+      "department": "Human Resources",
+      "isEditable": false
+    },
+    {
+      "id": 8,
+      "firstName": "James",
+      "lastName": "Garcia",
+      "salary": 68000,
+      "doj": "2022-05-15",
+      "department": "Sales",
+      "isEditable": false
+    },
+    {
+      "id": 9,
+      "firstName": "Jennifer",
+      "lastName": "Lee",
+      "salary": 76000,
+      "doj": "2021-11-20",
+      "department": "Finance",
+      "isEditable": false
+    },
+    {
+      "id": 10,
+      "firstName": "David",
+      "lastName": "Chen",
+      "salary": 88000,
+      "doj": "2020-08-12",
+      "department": "Information Technology",
+      "isEditable": false
+    },
+    {
+      "id": 11,
+      "firstName": "Amanda",
+      "lastName": "White",
+      "salary": 71000,
+      "doj": "2022-02-28",
+      "department": "Operations",
+      "isEditable": false
+    },
+    {
+      "id": 12,
+      "firstName": "Christopher",
+      "lastName": "Harris",
+      "salary": 69000,
+      "doj": "2022-04-05",
+      "department": "Sales",
+      "isEditable": false
+    },
+    {
+      "id": 13,
+      "firstName": "Nicole",
+      "lastName": "Rodriguez",
+      "salary": 77000,
+      "doj": "2021-10-18",
+      "department": "Finance",
+      "isEditable": false
+    },
+    {
+      "id": 14,
+      "firstName": "Robert",
+      "lastName": "Taylor",
+      "salary": 79000,
+      "doj": "2021-03-22",
+      "department": "Operations",
+      "isEditable": false
+    },
+    {
+      "id": 15,
+      "firstName": "Amanda",
+      "lastName": "Johnson",
+      "salary": 73000,
+      "doj": "2022-06-10",
+      "department": "Human Resources",
+      "isEditable": false
+    }
+  ]
+}

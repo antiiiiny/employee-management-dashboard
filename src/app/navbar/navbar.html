@@ -1,12 +1,10 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <div class="container">
-    <a class="navbar-brand" routerLink="/">Employee Dashboard</a>
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/employees" routerLinkActive="active">
-          Employees
-        </a>
-      </li>
-    </ul>
-  </div>
-</nav>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Employee Dashboard</span>
+    <span class="spacer"></span>
+    <button mat-button routerLink="/employees" routerLinkActive="active">
+      <mat-icon>group</mat-icon>
+      Employees
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>

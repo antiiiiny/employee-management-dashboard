@@ -1,7 +1,7 @@
-.navbar-brand {
-  font-weight: bold;
+.spacer {
+  flex: 1 1 auto;
 }
+
 .active {
-  background-color: #007bff;
-  color: white !important;
+  background-color: rgba(255, 255, 255, 0.1);
 }

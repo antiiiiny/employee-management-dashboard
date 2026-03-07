@@ -1,9 +1,24 @@
-.high{
-    background-color: cadetblue;
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 16px;
 }
-.medium{
-    background-color: lightgreen;
+
+.form-row mat-form-field {
+  flex: 1;
+  min-width: 200px;
 }
-.low{
-    background-color: lightcoral;
+
+.edit-field {
+  width: 120px;
+}
+
+.employee-link {
+  color: #1976d2;
+  text-decoration: none;
+}
+
+.employee-link:hover {
+  text-decoration: underline;
 }
