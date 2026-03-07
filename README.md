@@ -1,5 +1,7 @@
 # Employee Management Dashboard
 
+![Dashboard Screenshot](screenshots/dashboard.png)
+
 ## Overview
 Angular 20 enterprise app for managing employees with admin authentication, CRUD operations, and dynamic department analytics.
 
